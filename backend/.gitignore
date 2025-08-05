@@ -1,0 +1,8 @@
+# Node modules (big unnecessary files)
+node_modules/
+
+# Environment variables (security)
+.env
+
+# Logs (optional)
+*.log

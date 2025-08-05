@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>URL Shortener</title>
+  <style>
+    :root {
+      --bg-color: #1e1e2f;
+      --card-color: #2a2a3b;
+      --input-bg: #3a3a4a;
+      --text-color: #e0e0e0;
+      --accent-color: #4fa1ff;
+      --accent-hover: #357bd8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: var(--card-color);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .card h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      background-color: var(--input-bg);
+      border: 2px solid #555;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      color: var(--text-color);
+    }
+
+    .input-box:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      font-size: 16px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    table {
+      width: 90%;
+      max-width: 800px;
+      border-collapse: collapse;
+      background: var(--card-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      margin-bottom: 40px;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background-color: #333;
+      color: #f0f0f0;
+    }
+
+    tr:hover {
+      background-color: #2f2f44;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🔗 URL Shortener</h1>
+
+    <% if (locals.id) { %>
+      <p><strong>URL Generated:</strong><br>
+      <a href="http://localhost:3000/<%= id %>" target="_blank">
+        http://localhost:3000/<%= id %>
+      </a></p>
+      <br>
+    <% } %>
+
+    <form method="POST" action="/url">
+      <input
+        type="text"
+        placeholder="Enter your long URL here..."
+        name="url"
+        class="input-box"
+        id="longUrl"
+      />
+      <br />
+      <button class="btn" type="submit" onclick="shortenUrl()">Shorten</button>
+    </form>
+  </div>
+
+  <% if (urls && urls.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>ShortID</th>
+          <th>Original URL</th>
+          <th>Clicks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% urls.forEach((url, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <a href="http://localhost:3000/<%= url.Shortid %>" target="_blank">
+                <%= url.Shortid %>
+              </a>
+            </td>
+            <td><%= url.redirecturl %></td>
+            <td><%= url.visithistory.length %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+
+  <script>
+    function shortenUrl() {
+      const input = document.getElementById("longUrl").value;
+      if (!input.trim()) return alert("Please enter a valid URL.");
+    }
+  </script>
+
+</body>
+</html>
