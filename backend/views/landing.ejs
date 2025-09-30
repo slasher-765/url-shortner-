@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Shortener - Landing Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            margin: auto;
+            text-align: center;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            max-width: 400px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px 15px;
+            padding: 12px 32px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn.signup {
+            background: #28a745;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to URL Shortener</h1>
+        <p>Shorten your links easily and manage them efficiently.</p>
+        <a href="/signup" class="btn signup">Sign Up</a>  <!--the meaning of this line is ki agr koi signup button par click kare toh wo /signup route par chala jaye-->
+        <a href="/login" class="btn">Log In</a>
+    </div>
+</body>
+</html>
